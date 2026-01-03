@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>امیرعلی انصاری — طراح گرافیک</title>
+    <!-- فونت وزیرمتون -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            background: #f0f9ff; /* آبی بسیار ملایم — گرم‌تر از قبل */
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+        }
+        h1 {
+            font-size: 2.4rem;
+            color: #0f172a;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        .profile-pic {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            margin: 0 auto 20px;
+            display: block;
+            object-fit: cover;
+            border: 5px solid #dbeafe;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+        nav {
+            background: white;
+            padding: 12px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        nav a {
+            color: #1e40af;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        nav a:hover, nav a:focus {
+            background: #dbeafe;
+            color: #1e3a8a;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #f97316;
+            border-radius: 1px;
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+        nav a:hover::after {
+            width: 70%;
+        }
+        section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #0f172a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3b82f6;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .skill-item {
+            margin: 22px 0;
+        }
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .skill-bar {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .skill-level {
+            height: 100%;
+            background: #3b82f6;
+            border-radius: 5px;
+            transition: width 1.2s ease-in-out;
+        }
+        /* Photoshop رو نارنجی برجسته کنیم */
+        .skill-level.photoshop {
+            background: #f97316;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .project-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: #fafbff;
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+        }
+        .project-img {
+            height: 140px;
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e40af;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .project-content {
+            padding: 20px;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-family: 'Vazirmatn', Tahoma;
+            font-size: 16px;
+            direction: rtl;
+            transition: border 0.3s;
+        }
+        form input:focus, form textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+        form button {
+            width: 100%;
+            padding: 16px;
+            background: #f97316; /* 🟠 نارنجی گرم */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+        }
+        form button:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(249, 115, 22, 0.4);
+        }
+        @media (max-width: 600px) {
+            header, section {
+                padding: 20px;
+            }
+            h1 { font-size: 1.9rem; }
+            h2 { font-size: 1.5rem; }
+            .profile-pic { width: 140px; height: 140px; }
+            nav a { margin: 0 6px; padding: 6px 12px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>سلام! من امیرعلی هستم 👋</h1>
+            <img src="Gemini_Generated_Image_sa47fnsa47fnsa47.jpg.png" alt="عکس امیرعلی" class="profile-pic" id="profilePic">
+            <p>هنرجوی گرافیک رایانه | طراح، تدوین‌گر، برنامه‌نویس آینده 🎨🎬💻</p>
+        </header>
+
+        <nav>
+            <a href="#home">خانه</a>
+            <a href="#about">درباره من</a>
+            <a href="#skills">مهارت‌ها</a>
+            <a href="#projects">پروژه‌ها</a>
+            <a href="#contact">تماس</a>
+        </nav>
+
+        <section id="about">
+            <h2>درباره من</h2>
+            <p>من <strong>امیرعلی انصاری</strong> هستم، هنرجوی رشته <strong>گرافیک رایانه</strong> در هنرستان شهید محمدی.</p>
+            <p>علاقه‌ی اصلی من به <strong>طراحی</strong> از دوران اواخر ابتدایی شروع شد — زمانی که اولین لوگوی مدرسه‌ام رو با Paint درست کردم! 🖌️</p>
+            <p>هدفم اینه که با ترکیب <strong>خلاقیت + تکنولوژی</strong>، اثری ماندگار بذارم — چه با یه پوستر، چه با یه کد، چه با یه ویدیو.</p>
+        </section>
+
+        <section id="skills">
+            <h2>مهارت‌ها</h2>
+            
+            <div class="skill-item">
+                <div class="skill-name">
+                    <span>🎨 Photoshop</span>
+                    <span>100%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-level photoshop" style="width: 100%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-name">
+                    <span>🎬 تدوین ویدیو</span>
+                    <span>85%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 85%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-name">
+                    <span>🖥️ HTML</span>
+                    <span>90%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 90%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-name">
+                    <span>🎨 CSS</span>
+                    <span>80%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 80%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-name">
+                    <span>🐍 Python</span>
+                    <span>70%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 70%;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>پروژه‌های اخیر</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">پوستر مدرسه</div>
+                    <div class="project-content">
+                        <h3>پوستر هفته فناوری</h3>
+                        <p>طراحی با Photoshop — ترکیب رنگ‌های جذاب و تایپوگرافی خوانا</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">لوگوی شخصی</div>
+                    <div class="project-content">
+                        <h3>لوگوی «آینده‌سازان»</h3>
+                        <p>طراحی هویت بصری برای یه ایده استارتاپی دانش‌آموزی</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">ویدیو تبلیغاتی</div>
+                    <div class="project-content">
+                        <h3>تیزر آموزشی</h3>
+                        <p>تدوین + موشن گرافیک با Premiere Pro و After Effects</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>📞 تماس با من</h2>
+            <p style="text-align: center; margin-bottom: 15px; font-size: 1.1rem;">
+                <strong>📱 0937 534 5049</strong>
+            </p>
+            <p style="text-align: center; margin-bottom: 25px; color: #64748b;">
+                اگر پروژه‌ای داری، سوالی داری، یا فقط می‌خوای یه دوست خلاق باهام چت کنی — بزن بیا!
+            </p>
+            <form onsubmit="alert('پیام شما ارسال شد! 🎉\n(توی نسخه آنلاین واقعی، مستقیم به تلگرامم میاد!)'); return false;">
+                <input type="text" placeholder="نام شما" required>
+                <input type="email" placeholder="ایمیل یا تلگرام شما" required>
+                <textarea placeholder="پیام شما — مثلاً: 'سلام، یه پروژه طراحی دارم...'" rows="4" required></textarea>
+                <button type="submit">ارسال پیام ✨</button>
+            </form>
+        </section>
+
+    </div>
+
+    <script>
+        // انیمیشن نوار مهارت‌ها وقتی به بخش مهارت‌ها اسکرول می‌کنی
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillBars = document.querySelectorAll('.skill-level');
+            const skillsSection = document.querySelector('#skills');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        skillBars.forEach(bar => {
+                            const width = bar.style.width;
+                            bar.style.width = '0';
+                            setTimeout(() => {
+                                bar.style.width = width;
+                            }, 200);
+                        });
+                        observer.unobserve(skillsSection);
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            if (skillsSection) observer.observe(skillsSection);
+        });
+    </script>
+</body>
+</html>
